@@ -5,7 +5,7 @@
 
 ### Objetivo
 
-1. Criar um clone do clássico Sokoban em Pygame...
+1. Criar um clone do clássico Boxing de Atari 2600 em Pygame...
 
 ### Descrição
 
@@ -28,4 +28,3 @@ Ou seja, se ele ficar junto à parede, a pessoa precisa de reiniciar o jogo. Est
 1. ler teclas e mover as peças
 2. verificar se jogador chegou ao fim do nível
 
-- Atualizado a última vez em 2/12/2021
