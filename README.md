@@ -1,7 +1,7 @@
-# Projeto XXXX
+# Projeto Boxing
 ## FP/L.EIC, 2021/22
-## Fulano de Tal (up2021xxxxx)
-## 1LEICXX
+## Pedro Oliveira (up202108669)
+## 1LEIC07
 
 ### Objetivo
 
