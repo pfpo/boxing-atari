@@ -6,12 +6,12 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.image = pygame.image.load(
-            'graphics/player1/player1.png').convert_alpha()
+            'graphics/player1/playertest.png').convert_alpha()
         self.rect = self.image.get_rect(center=(200, 300))
 
     def player_input(self):
         left, right, up, down = CollisionType()
-        vel = 8
+        vel = 6
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP] and up:
             self.rect.y -= vel
@@ -21,6 +21,8 @@ class Player(pygame.sprite.Sprite):
             self.rect.x -= vel
         if keys[pygame.K_RIGHT] and right:
             self.rect.x += vel
+        if keys[pygame.K_SPACE]:
+            pass
 
     def bounds(self):
         if self.rect.left <= 0:
@@ -40,13 +42,14 @@ class Player(pygame.sprite.Sprite):
 class Player2(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
+
         self.image = pygame.image.load(
-            'graphics/player2/player2.png').convert_alpha()
+            'graphics/player2/playertest2.png').convert_alpha()
         self.rect = self.image.get_rect(center=(600, 300))
 
     def player_input(self):
         right, left, down, up = CollisionType()
-        vel = 8
+        vel = 6
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w] and up:
             self.rect.y -= vel
@@ -74,14 +77,15 @@ class Player2(pygame.sprite.Sprite):
 
 def CollisionType():
     left, right, up, down = True, True, True, True
+    tollerance= 8
     if pygame.sprite.collide_rect(player.sprite, player2.sprite):
-        if abs(player.sprite.rect.right - player2.sprite.rect.left) < 10:
+        if abs(player.sprite.rect.right - player2.sprite.rect.left) < 8:
             right = False
-        if abs(player.sprite.rect.left - player2.sprite.rect.right) < 10:
+        if abs(player.sprite.rect.left - player2.sprite.rect.right) < 8:
             left = False
-        if abs(player.sprite.rect.top - player2.sprite.rect.bottom) < 10:
+        if abs(player.sprite.rect.top - player2.sprite.rect.bottom) < 8:
             up = False
-        if abs(player.sprite.rect.bottom - player2.sprite.rect.top) < 10:
+        if abs(player.sprite.rect.bottom - player2.sprite.rect.top) < 8:
             down = False
     return left, right, up, down
 
@@ -95,6 +99,20 @@ def Temporizador():
     time_rec = time_surf.get_rect(center=(400, 50))
     screen.blit(time_surf, time_rec)
     return round_time
+
+
+def Draw():
+    if player.sprite.rect.x < player2.sprite.rect.x:
+        player.sprite.image = pygame.image.load(
+            'graphics/player1/playertest.png').convert_alpha()
+        player2.sprite.image = pygame.image.load(
+            'graphics/player2/playertest2.png').convert_alpha()
+        
+    else:
+        player.sprite.image = pygame.image.load(
+            'graphics/player1/playertestinv.png').convert_alpha()
+        player2.sprite.image = pygame.image.load(
+            'graphics/player2/playertest2inv.png').convert_alpha()
 
 
 pygame.init()
@@ -140,7 +158,7 @@ while True:
         # sair do jogo
         if event.type == pygame.QUIT:
             pygame.quit()
-            exit()
+            sys.exit()
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             pygame.quit()
             sys.exit()
@@ -160,6 +178,7 @@ while True:
         # Logic
         player.update()
         player2.update()
+        Draw()
 
         if Temporizador() == 0 or scoreW == 100 or scoreB == 100:
             running = False
